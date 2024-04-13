@@ -97,7 +97,7 @@ function Tables() {
                     <Grid container spacing={2}>
                       <Grid item xs={12} md={6}>
                         <TextField
-                          label="Nom"
+                          label="Lastname"
                           name="nom"
                           variant="outlined"
                           fullWidth
@@ -107,7 +107,7 @@ function Tables() {
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <TextField
-                          label="Prénom"
+                          label="firstname"
                           name="prenom"
                           variant="outlined"
                           fullWidth
@@ -119,7 +119,7 @@ function Tables() {
                         <>
                           <Grid item xs={12} md={6}>
                             <TextField
-                              label="Numéro d'inscription"
+                              label="RegistrationId"
                               name="numeroInscription"
                               variant="outlined"
                               fullWidth
@@ -129,7 +129,7 @@ function Tables() {
                           </Grid>
                           <Grid item xs={12} md={6}>
                             <TextField
-                              label="Date de naissance"
+                              label="Date of birth"
                               name="dateNaissance"
                               type="date"
                               variant="outlined"
@@ -141,7 +141,7 @@ function Tables() {
                           </Grid>
                           <Grid item xs={12} md={6}>
                             <TextField
-                              label="Filière"
+                              label="Field"
                               name="filiere"
                               variant="outlined"
                               fullWidth
