@@ -9,6 +9,7 @@ import MDButton from "components/MDButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/issatso.png";
 
+
 function Cover() {
   return (
     <CoverLayout image={bgImage}>
@@ -58,7 +59,7 @@ function Cover() {
               <MDBox mt={1} textAlign="center">
                 <MDTypography
                   component={Link}
-                  to="/authentication/forgot-password"
+                  to="/authentication/Forgetpassword"
                   variant="button"
                   color="info"
                   fontWeight="medium"
@@ -78,6 +79,8 @@ function Cover() {
                   &nbsp;&nbsp;Remember me
                 </MDTypography>
               </MDBox>
+             
+
               <MDBox mt={4} mb={1}>
                 <MDButton variant="gradient" color="info" fullWidth>
                   Sign In
@@ -89,6 +92,7 @@ function Cover() {
                   Don't have an account?{" "}
                   <MDTypography
                     component={Link}
+                    
                     to="/authentication/sign-up"
                     variant="button"
                     color="info"

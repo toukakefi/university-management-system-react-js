@@ -1,6 +1,7 @@
 
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
+import Forgetpassword from "layouts/authentication/Forgetpassword"
 
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
@@ -40,11 +41,22 @@ const routes = [
     type: "collapse",
     name: "Log out",
     key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
+    icon: <Icon fontSize="small">logout</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
   },
- 
+  {
+    
+    route: "/authentication/sign-up",
+    component: <SignUp />,
+  },
+
+  {
+    
+    route: "/authentication/Forgetpassword",
+    component: <Forgetpassword />,
+  },
+  
 ];
 
 export default routes;

@@ -124,8 +124,15 @@ export default function Data() {
                     variant="outlined"
                   />
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button variant="contained" color="primary" onClick={handleSave} style={{ marginRight: '10px' }}>Save</Button>
-                    <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+                  <Button
+  variant="contained"
+  color="primary"
+  onClick={handleSave}
+  style={{ color: 'white', marginRight: '10px' }}
+>
+  Save
+</Button>
+                    <Button variant="outlined" onClick={handleClose}><DialogTitle>Cancel</DialogTitle></Button>
                   </div>
                 </form>
               </DialogContent>

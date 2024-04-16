@@ -193,6 +193,7 @@ function Tables() {
                             variant="contained"
                             color="primary"
                             type="submit"
+                            style={{ color: 'white', marginTop: '10px' }}
                           >
                             Submit
                           </Button>
