@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
-import { Edit, Delete } from '@mui/icons-material';
+import { Edit, Delete, Description, CalendarToday } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   TextField,
   Button,
-  List,
-  ListItem,
-  ListItemText,
-  MenuItem,
+  MenuItem
 } from '@mui/material';
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
-import team2 from "assets/images/prof.jpg";
+import team2 from "assets/images/ia.jpg";
 
 export default function Data() {
   const [editingProfessor, setEditingProfessor] = useState(null);
@@ -22,10 +19,10 @@ export default function Data() {
   const [selectedField, setSelectedField] = useState('');
   const [formData, setFormData] = useState({
     id: '',
-    name: '',
-    subject: '',
-    email: '',
-    dateOfBirth: ''
+    Title: '',
+    Description: '',
+    attachment: '',
+    Date: '',
   });
 
   const handleEditClick = (professorId) => {
@@ -39,10 +36,10 @@ export default function Data() {
     setSelectedField('');
     setFormData({
       id: '',
-      name: '',
-      subject: '',
-      email: '',
-      dateOfBirth: ''
+      Title: '',
+      Description: '',
+      attachment: '',
+      Date: ''
     });
   };
 
@@ -61,34 +58,36 @@ export default function Data() {
     handleClose();
   };
 
-  const Author = ({ image, name, email }) => (
+  const Author = ({ image, name }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" />
       <MDBox ml={2} lineHeight={1}>
         <MDTypography display="block" variant="button" fontWeight="medium">
           {name}
         </MDTypography>
-        <MDTypography variant="caption">{email}</MDTypography>
+        
       </MDBox>
     </MDBox>
   );
+ 
 
   return {
     columns: [
-      { Header: "Professors", accessor: "project", width: "30%", align: "left" },
-      { Header: "Subject", accessor: "status", align: "center" },
-      { Header: "Date of Birth", accessor: "dateOfBirth", align: "center" },
+      { Header: "News", accessor: "project", width: "30%", align: "left" },
+      { Header: "Description", accessor: "status", align: "center" },
+      { Header: "Date And time ", accessor: "date", align: "center" },
+      { Header: "attachement", accessor: "attachement", align: "center" },
       { Header: "action", accessor: "action", align: "center" },
     ],
 
     rows: [
       {
-        id: "1", // Identifiant du professeur
+        id: "1",
         project: (
           <div>
-            <Author image={team2} name="flen fouleni" email="flenfouleni@gmail.com" />
+            <Author  name="event name " image={team2}  />
             <Dialog open={open && editingProfessor === "1"} onClose={handleClose}>
-              <DialogTitle>Edit Professor</DialogTitle>
+              <DialogTitle>Edit News</DialogTitle>
               <DialogContent>
                 <form style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }}>
                   <TextField
@@ -101,31 +100,34 @@ export default function Data() {
                   />
                   <TextField
                     select
-                    label="Select Field to Edit"
+                    label="Select Actuality to Edit"
                     value={selectedField}
                     onChange={(e) => handleFieldSelect(e.target.value)}
                     fullWidth
                     style={{ marginBottom: '20px' }}
                     variant="outlined"
                   >
-                    <MenuItem value="name">Name</MenuItem>
-                    <MenuItem value="subject">Subject</MenuItem>
-                    <MenuItem value="email">Email</MenuItem>
-                    <MenuItem value="dateOfBirth">Date of Birth</MenuItem>
+                    <MenuItem value="Title"> Title</MenuItem>
+                    <MenuItem value="description"> Description</MenuItem>
+                    <MenuItem value="date"> Date</MenuItem>
+                    <MenuItem value="attachement"> Attachement</MenuItem>
                   </TextField>
                   {selectedField && (
                     <TextField
-                      label={selectedField === 'dateOfBirth' ? 'Date of Birth' : selectedField.charAt(0).toUpperCase() + selectedField.slice(1)}
+                      label={selectedField === 'date' ? 'Date of Birth' : selectedField.charAt(0).toUpperCase() + selectedField.slice(1)}
                       name={selectedField}
                       value={formData[selectedField]}
                       onChange={handleInputChange}
                       fullWidth
                       style={{ marginBottom: '20px' }}
                       variant="outlined"
-                      InputLabelProps={{
-                        shrink: selectedField === 'dateOfBirth' ? true : undefined,
+                      InputProps={{
+                        endAdornment: selectedField === 'date' ? <CalendarToday /> : null,
                       }}
-                      type={selectedField === 'dateOfBirth' ? 'date' : 'text'}
+                      InputLabelProps={{
+                        shrink: selectedField === 'date' ? true : undefined,
+                      }}
+                      type={selectedField === 'date' ? 'date' : 'text'}
                     />
                   )}
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -137,13 +139,9 @@ export default function Data() {
                     >
                       Save
                     </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={handleClose}
-                      style={{ color: 'grey' }}
-                    >
-                      Cancel
-                    </Button>
+                    <Button variant="outlined" onClick={handleClose}
+                    style={{ color: 'grey', marginRight: '10px' }}
+                    >Cancel</Button>
                   </div>
                 </form>
               </DialogContent>
@@ -152,12 +150,17 @@ export default function Data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Advanced Web
+           jsdfhjskdfhjkdsfh
           </MDTypography>
         ),
-        dateOfBirth:(
+        date: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            1990-01-01
+          20/05/2024
+          </MDTypography>
+        ),
+        attachment: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+          url
           </MDTypography>
         ),
         action: (
@@ -165,7 +168,7 @@ export default function Data() {
             <Edit onClick={() => handleEditClick("1")} />
             <Delete />
           </MDBox>
-        ), 
+        ),
       }
     ],
   };

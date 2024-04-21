@@ -108,11 +108,10 @@ export default function Data() {
                     style={{ marginBottom: '20px' }}
                     variant="outlined"
                   >
-                    {['Firstname', 'Lastname', 'Email', 'Date of birth'].map((option) => (
-                      <MenuItem key={option} value={option}>
-                        {option}
-                      </MenuItem>
-                    ))}
+                    <MenuItem value="Firstname">Firstname</MenuItem>
+                    <MenuItem value="Lastname">Lastname</MenuItem>
+                    <MenuItem value="Email">Email</MenuItem>
+                    <MenuItem value="Date of birth">Date of birth</MenuItem>
                   </TextField>
                   <TextField
                     label="New Value"
@@ -124,15 +123,18 @@ export default function Data() {
                     variant="outlined"
                   />
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Button
-  variant="contained"
-  color="primary"
-  onClick={handleSave}
-  style={{ color: 'white', marginRight: '10px' }}
->
-  Save
-</Button>
-                    <Button variant="outlined" onClick={handleClose}><DialogTitle>Cancel</DialogTitle></Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSave}
+                      style={{ color: 'white', marginRight: '10px' }}
+                    >
+                      Save
+                    </Button>
+                    <Button variant="outlined" onClick={handleClose}
+                    style={{ color: 'grey', marginRight: '10px' }}
+                    
+                    >Cancel</Button>
                   </div>
                 </form>
               </DialogContent>

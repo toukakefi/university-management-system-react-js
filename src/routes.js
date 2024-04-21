@@ -5,6 +5,13 @@ import Forgetpassword from "layouts/authentication/Forgetpassword"
 
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import ACT from "layouts/actualites";
+import Time from "layouts/Timetables";
+import PersonIcon from '@mui/icons-material/Person';
+import ArticleIcon from '@mui/icons-material/Article';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+
+
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -20,23 +27,43 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Manage Students",
+    name: " Students",
     key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <PersonIcon />,
     route: "/tables",
     component: <Tables />,
   },
   {
     type: "collapse",
-    name: "Manage Professors",
+    name: "Professors",
     key: "tables1",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <PersonIcon />,
     route: "/tables1",
     component: <Tables />,
   },
   
   
  
+  
+  {
+    type: "collapse",
+    name: "Actualities",
+   
+    icon: <ArticleIcon />,
+
+    route: "layouts/actualites",
+    component: <ACT />,
+  },
+  {
+    type: "collapse",
+    name: "Timetables",
+    
+    icon: <ScheduleIcon />
+    ,
+    route: "layouts/Timetables",
+    component: <Time />
+
+  },
   {
     type: "collapse",
     name: "Log out",
@@ -44,19 +71,21 @@ const routes = [
     icon: <Icon fontSize="small">logout</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
-  },
+  },,
   {
     
     route: "/authentication/sign-up",
     component: <SignUp />,
-  },
+  },  
+  
+  
 
   {
     
     route: "/authentication/Forgetpassword",
     component: <Forgetpassword />,
-  },
-  
+  }
+
 ];
 
 export default routes;

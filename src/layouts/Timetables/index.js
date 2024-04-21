@@ -17,7 +17,7 @@ import DataTable from "examples/Tables/DataTable";
 
 // Data
 import authorsTableData from "layouts/tables/data/authorsTableData";
-import projectsTableData from "layouts/tables/data/projectsTableData";
+import projectsTableData from "layouts/Timetables/data/projectsTableData";
 
 function Tables() {
   const { columns, rows } = authorsTableData();
@@ -30,12 +30,15 @@ function Tables() {
   };
 
   const [formData, setFormData] = useState({
-    nom: "",
-    prenom: "",
-    numeroInscription: "",
-    dateNaissance: "",
     filiere: "",
-    email: "",
+    groupe: "",
+    salle: "",
+    professeur: "",
+    typeSemaine: "",
+    matiere: "",
+    heureDebut: "",
+    heureFin: "",
+    jour: "",
   });
 
   const handleChange = (event) => {
@@ -48,23 +51,25 @@ function Tables() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you can add the logic to submit the form data
+    // Ajouter la logique pour soumettre les données de l'emploi ici
     console.log("Form Data:", formData);
-    // Reset form fields
+    // Réinitialiser les champs du formulaire
     setFormData({
-      nom: "",
-      prenom: "",
-      numeroInscription: "",
-      dateNaissance: "",
       filiere: "",
-      email: "",
+      groupe: "",
+      salle: "",
+      professeur: "",
+      typeSemaine: "",
+      matiere: "",
+      heureDebut: "",
+      heureFin: "",
+      jour: "",
     });
-    // Hide the form after submission
+    // Masquer le formulaire après la soumission
     setShowForm(false);
   };
 
-
-  const isManagingStudents = window.location.pathname === "/tables";
+  const isManagingProfessors = window.location.pathname === "/tables";
 
   return (
     <DashboardLayout>
@@ -72,7 +77,7 @@ function Tables() {
       <MDBox pt={6} pb={10}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            {/* Add Button */}
+            {/* Bouton Ajouter */}
             <Grid container justifyContent="flex-end">
               <Button
                 variant="contained"
@@ -81,109 +86,111 @@ function Tables() {
                 startIcon={<AddIcon />}
                 onClick={toggleForm}
               >
-                Add New {isManagingStudents ? "Student" : "Professor"}
+                Add new timetable
               </Button>
             </Grid>
           </Grid>
           {showForm && (
             <Grid item xs={12}>
-              {/* Form for adding new student or professor */}
+              {/* Formulaire pour ajouter un nouvel emploi */}
               <Card>
                 <MDBox p={2}>
                   <MDTypography variant="h6" gutterBottom>
-                    Add New {isManagingStudents ? "Student" : "Professor"}
+                    Add new timetable
                   </MDTypography>
                   <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                       <Grid item xs={12} md={6}>
                         <TextField
-                          label="Lastname"
-                          name="nom"
+                          label="Field"
+                          name="filiere"
                           variant="outlined"
                           fullWidth
-                          value={formData.nom}
+                          value={formData.filiere}
                           onChange={handleChange}
                         />
                       </Grid>
                       <Grid item xs={12} md={6}>
                         <TextField
-                          label="firstname"
-                          name="prenom"
+                          label="Group"
+                          name="groupe"
                           variant="outlined"
                           fullWidth
-                          value={formData.prenom}
+                          value={formData.groupe}
                           onChange={handleChange}
                         />
                       </Grid>
-                      {isManagingStudents ? (
-                        <>
-                          <Grid item xs={12} md={6}>
-                            <TextField
-                              label="RegistrationId"
-                              name="numeroInscription"
-                              variant="outlined"
-                              fullWidth
-                              value={formData.numeroInscription}
-                              onChange={handleChange}
-                            />
-                          </Grid>
-                          <Grid item xs={12} md={6}>
-                            <TextField
-                              label="Date of birth"
-                              name="dateNaissance"
-                              type="date"
-                              variant="outlined"
-                              fullWidth
-                              InputLabelProps={{ shrink: true }}
-                              value={formData.dateNaissance}
-                              onChange={handleChange}
-                            />
-                          </Grid>
-                          <Grid item xs={12} md={6}>
-                            <TextField
-                              label="Field"
-                              name="filiere"
-                              variant="outlined"
-                              fullWidth
-                              value={formData.filiere}
-                              onChange={handleChange}
-                            />
-                          </Grid>
-                        </>
-                      ) : (
-                        <>
-                          <Grid item xs={12} md={6}>
-                            <TextField
-                              label="Subject"
-                              name="subject"
-                              variant="outlined"
-                              fullWidth
-                              value={formData.subject}
-                              onChange={handleChange}
-                            />
-                          </Grid>
-                          <Grid item xs={12} md={6}>
-                            <TextField
-                              label="Date of Birth"
-                              name="dateOfBirth"
-                              type="date"
-                              variant="outlined"
-                              fullWidth
-                              InputLabelProps={{ shrink: true }}
-                              value={formData.dateOfBirth}
-                              onChange={handleChange}
-                            />
-                          </Grid>
-                        </>
-                      )}
                       <Grid item xs={12} md={6}>
                         <TextField
-                          label="Email"
-                          name="email"
-                          type="email"
+                          label="Room"
+                          name="salle"
                           variant="outlined"
                           fullWidth
-                          value={formData.email}
+                          value={formData.salle}
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          label="Professor"
+                          name="professeur"
+                          variant="outlined"
+                          fullWidth
+                          value={formData.professeur}
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          label="Type of week"
+                          name="typeSemaine"
+                          variant="outlined"
+                          fullWidth
+                          value={formData.typeSemaine}
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          label="Subject"
+                          name="matiere"
+                          variant="outlined"
+                          fullWidth
+                          value={formData.matiere}
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          label="start at"
+                          name="heureDebut"
+                          type="time"
+                          variant="outlined"
+                          fullWidth
+                          InputLabelProps={{ shrink: true }}
+                          value={formData.heureDebut}
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          label="finish at"
+                          name="heureFin"
+                          type="time"
+                          variant="outlined"
+                          fullWidth
+                          InputLabelProps={{ shrink: true }}
+                          value={formData.heureFin}
+                          onChange={handleChange}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          label="Day"
+                          name="jour"
+                          variant="outlined"
+                          fullWidth
+                          value={formData.jour}
                           onChange={handleChange}
                         />
                       </Grid>
@@ -218,14 +225,14 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  {isManagingStudents ? "Students" : "Professors"}
+                 Timetables
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
                   table={{
-                    columns: isManagingStudents ? columns : pColumns,
-                    rows: isManagingStudents ? rows : pRows,
+                    columns: isManagingProfessors ? columns : pColumns,
+                    rows: isManagingProfessors ? rows : pRows,
                   }}
                   isSorted={false}
                   entriesPerPage={false}
