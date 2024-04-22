@@ -83,7 +83,7 @@ export default function Data() {
 
     rows: [
       {
-        id: "1", // Identifiant du professeur
+        id: "1", 
         project: (
           <div>
             <Author image={team2} name="flen fouleni" email="flenfouleni@gmail.com" />
