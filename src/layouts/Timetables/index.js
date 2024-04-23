@@ -4,6 +4,8 @@ import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -15,12 +17,10 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 import DataTable from "examples/Tables/DataTable";
 
-// Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/Timetables/data/projectsTableData";
 
 function Tables() {
-  const { columns, rows } = authorsTableData();
+
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   const [showForm, setShowForm] = useState(false);
@@ -30,46 +30,36 @@ function Tables() {
   };
 
   const [formData, setFormData] = useState({
-    filiere: "",
-    groupe: "",
-    salle: "",
-    professeur: "",
-    typeSemaine: "",
-    matiere: "",
-    heureDebut: "",
-    heureFin: "",
-    jour: "",
+    title: "",
+    description: "",
+    date: "",
+    attachment: null, // Adding field for attachment
   });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value, files } = event.target;
+    // If the element is a file input, files contains the selected files
+    // Otherwise, it's a normal text field
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: files ? files[0] : value,
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Ajouter la logique pour soumettre les données de l'emploi ici
+    // Here you can add logic to submit the form data
     console.log("Form Data:", formData);
-    // Réinitialiser les champs du formulaire
+    // Reset the form fields
     setFormData({
-      filiere: "",
-      groupe: "",
-      salle: "",
-      professeur: "",
-      typeSemaine: "",
-      matiere: "",
-      heureDebut: "",
-      heureFin: "",
-      jour: "",
+      title: "",
+      description: "",
+      date: "",
+      attachment: null,
     });
-    // Masquer le formulaire après la soumission
+    // Hide the form after submission
     setShowForm(false);
   };
-
-  const isManagingProfessors = window.location.pathname === "/tables";
 
   return (
     <DashboardLayout>
@@ -77,7 +67,7 @@ function Tables() {
       <MDBox pt={6} pb={10}>
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            {/* Bouton Ajouter */}
+            {/* Add button */}
             <Grid container justifyContent="flex-end">
               <Button
                 variant="contained"
@@ -86,113 +76,73 @@ function Tables() {
                 startIcon={<AddIcon />}
                 onClick={toggleForm}
               >
-                Add new timetable
+               Add an Internship Opportunity
               </Button>
             </Grid>
           </Grid>
           {showForm && (
             <Grid item xs={12}>
-              {/* Formulaire pour ajouter un nouvel emploi */}
+              {/* Form to add a new news */}
               <Card>
                 <MDBox p={2}>
                   <MDTypography variant="h6" gutterBottom>
-                    Add new timetable
+                    Add New Internship Opportunity
                   </MDTypography>
                   <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                      <Grid item xs={12} md={6}>
+                      <Grid item xs={12}>
                         <TextField
-                          label="Field"
-                          name="filiere"
+                          label="Title"
+                          name="title"
                           variant="outlined"
                           fullWidth
-                          value={formData.filiere}
+                          value={formData.title}
                           onChange={handleChange}
                         />
                       </Grid>
-                      <Grid item xs={12} md={6}>
+                      <Grid item xs={12}>
                         <TextField
-                          label="Group"
-                          name="groupe"
+                          label="Description"
+                          name="description"
                           variant="outlined"
                           fullWidth
-                          value={formData.groupe}
+                          multiline
+                          rows={4}
+                          value={formData.description}
                           onChange={handleChange}
                         />
                       </Grid>
-                      <Grid item xs={12} md={6}>
+                      <Grid item xs={12}>
                         <TextField
-                          label="Room"
-                          name="salle"
-                          variant="outlined"
-                          fullWidth
-                          value={formData.salle}
-                          onChange={handleChange}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <TextField
-                          label="Professor"
-                          name="professeur"
-                          variant="outlined"
-                          fullWidth
-                          value={formData.professeur}
-                          onChange={handleChange}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <TextField
-                          label="Type of week"
-                          name="typeSemaine"
-                          variant="outlined"
-                          fullWidth
-                          value={formData.typeSemaine}
-                          onChange={handleChange}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <TextField
-                          label="Subject"
-                          name="matiere"
-                          variant="outlined"
-                          fullWidth
-                          value={formData.matiere}
-                          onChange={handleChange}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <TextField
-                          label="start at"
-                          name="heureDebut"
-                          type="time"
+                          label="Date"
+                          name="date"
+                          type="date"
                           variant="outlined"
                           fullWidth
                           InputLabelProps={{ shrink: true }}
-                          value={formData.heureDebut}
+                          value={formData.date}
                           onChange={handleChange}
                         />
                       </Grid>
-                      <Grid item xs={12} md={6}>
-                        <TextField
-                          label="finish at"
-                          name="heureFin"
-                          type="time"
-                          variant="outlined"
-                          fullWidth
-                          InputLabelProps={{ shrink: true }}
-                          value={formData.heureFin}
+                      <Grid item xs={12}>
+                        <input
+                          accept="*/*"
+                          id="attachment"
+                          name="attachment"
+                          type="file"
+                          style={{ display: "none" }}
                           onChange={handleChange}
                         />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <TextField
-                          label="Day"
-                          name="jour"
-                          variant="outlined"
-                          fullWidth
-                          value={formData.jour}
-                          onChange={handleChange}
-                        />
+                        <label htmlFor="attachment">
+                          <IconButton
+                            color="primary"
+                            aria-label="upload attachment"
+                            component="span"
+                          >
+                            <AttachFileIcon />
+                          </IconButton>
+                          <span>{formData.attachment ? formData.attachment.name : "Attachment"}</span>
+                        </label>
                       </Grid>
                       <Grid container justifyContent="flex-end">
                         <Grid item>
@@ -225,14 +175,14 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                 Timetables
+                  News
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
                   table={{
-                    columns: isManagingProfessors ? columns : pColumns,
-                    rows: isManagingProfessors ? rows : pRows,
+                    columns: pColumns, // Use the defined columns for news
+                    rows: pRows, // Use the defined rows for news
                   }}
                   isSorted={false}
                   entriesPerPage={false}

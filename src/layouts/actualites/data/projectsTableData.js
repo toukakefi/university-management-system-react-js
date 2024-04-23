@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Edit, Delete, Description, CalendarToday } from '@mui/icons-material';
+import { Edit, Delete, CalendarToday } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -21,7 +21,7 @@ export default function Data() {
     id: '',
     Title: '',
     Description: '',
-    attachment: '',
+    Attachment: '', // Changed from 'attachment' to 'Attachment'
     Date: '',
   });
 
@@ -38,7 +38,7 @@ export default function Data() {
       id: '',
       Title: '',
       Description: '',
-      attachment: '',
+      Attachment: '', // Changed from 'attachment' to 'Attachment'
       Date: ''
     });
   };
@@ -55,6 +55,7 @@ export default function Data() {
   };
 
   const handleSave = () => {
+    // You can handle saving the form data here
     handleClose();
   };
 
@@ -65,19 +66,17 @@ export default function Data() {
         <MDTypography display="block" variant="button" fontWeight="medium">
           {name}
         </MDTypography>
-        
       </MDBox>
     </MDBox>
   );
- 
 
   return {
     columns: [
       { Header: "News", accessor: "project", width: "30%", align: "left" },
       { Header: "Description", accessor: "status", align: "center" },
       { Header: "Date And time ", accessor: "date", align: "center" },
-      { Header: "attachement", accessor: "attachement", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "Attachment", accessor: "attachment", align: "center" }, // Changed from 'attachement' to 'Attachment'
+      { Header: "Action", accessor: "action", align: "center" },
     ],
 
     rows: [
@@ -100,21 +99,21 @@ export default function Data() {
                   />
                   <TextField
                     select
-                    label="Select Actuality to Edit"
+                    label="Select Field to Edit"
                     value={selectedField}
                     onChange={(e) => handleFieldSelect(e.target.value)}
                     fullWidth
                     style={{ marginBottom: '20px' }}
                     variant="outlined"
                   >
-                    <MenuItem value="Title"> Title</MenuItem>
-                    <MenuItem value="description"> Description</MenuItem>
-                    <MenuItem value="date"> Date</MenuItem>
-                    <MenuItem value="attachement"> Attachement</MenuItem>
+                    <MenuItem value="Title">Title</MenuItem>
+                    <MenuItem value="Description">Description</MenuItem>
+                    <MenuItem value="Date">Date</MenuItem>
+                    <MenuItem value="Attachment">Attachment</MenuItem>
                   </TextField>
                   {selectedField && (
                     <TextField
-                      label={selectedField === 'date' ? 'Date of Birth' : selectedField.charAt(0).toUpperCase() + selectedField.slice(1)}
+                      label={selectedField === 'Date' ? 'Date' : selectedField}
                       name={selectedField}
                       value={formData[selectedField]}
                       onChange={handleInputChange}
@@ -122,12 +121,12 @@ export default function Data() {
                       style={{ marginBottom: '20px' }}
                       variant="outlined"
                       InputProps={{
-                        endAdornment: selectedField === 'date' ? <CalendarToday /> : null,
+                        endAdornment: selectedField === 'Date' ? <CalendarToday /> : null,
                       }}
                       InputLabelProps={{
-                        shrink: selectedField === 'date' ? true : undefined,
+                        shrink: selectedField === 'Date' ? true : undefined,
                       }}
-                      type={selectedField === 'date' ? 'date' : 'text'}
+                      type={selectedField === 'Date' ? 'date' : 'text'}
                     />
                   )}
                   <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -150,17 +149,17 @@ export default function Data() {
         ),
         status: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-           jsdfhjskdfhjkdsfh
+            jsdfhjskdfhjkdsfh
           </MDTypography>
         ),
         date: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          20/05/2024
+            20/05/2024
           </MDTypography>
         ),
         attachment: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-          url
+            url
           </MDTypography>
         ),
         action: (
