@@ -1,5 +1,5 @@
 Stages{
-    Stage "Building"{ 
+    Stage ('Building'){ 
         Steps{
             Script {
               sh  'docker build -t image2 .'
@@ -7,14 +7,14 @@ Stages{
         }
 
     }
-    Stage "Container"{
+    Stage ('Container'){
         Steps{
             Script{
               sh  'docker run -d --name container2 -p 3005:3005 image2'
             }
         }
     }
-    Stage{
+    Stage ('docker hub'){
         Steps{
             Script{
                 withCredentials([string(credentialsId:'dockerhub',variable:'dockerhub')]){
