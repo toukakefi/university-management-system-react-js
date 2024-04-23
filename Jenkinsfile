@@ -1,3 +1,5 @@
+pipeline{
+agent any
 Stages{
     Stage ('Building'){ 
         Steps{
@@ -26,5 +28,5 @@ Stages{
     }
 }
 
-
+}
 
