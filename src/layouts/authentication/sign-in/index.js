@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
@@ -9,8 +9,10 @@ import MDButton from "components/MDButton";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/issatso.png";
 
+function Cover({ history }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-function Cover() {
   return (
     <CoverLayout image={bgImage}>
       <MDBox
@@ -39,13 +41,15 @@ function Cover() {
             </MDTypography>
           </MDBox>
           <MDBox pt={4} pb={3} px={3}>
-            <MDBox component="form" role="form">
+            <form onSubmit={handleLogin}>
               <MDBox mb={2}>
                 <MDInput
                   type="email"
                   label="Email"
                   variant="standard"
                   fullWidth
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </MDBox>
               <MDBox mb={2}>
@@ -54,6 +58,8 @@ function Cover() {
                   label="Password"
                   variant="standard"
                   fullWidth
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </MDBox>
               <MDBox mt={1} textAlign="center">
@@ -79,10 +85,9 @@ function Cover() {
                   &nbsp;&nbsp;Remember me
                 </MDTypography>
               </MDBox>
-             
 
               <MDBox mt={4} mb={1}>
-                <MDButton variant="gradient" color="info" fullWidth>
+                <MDButton type="submit" variant="gradient" color="info" fullWidth>
                   Sign In
                 </MDButton>
               </MDBox>
@@ -92,7 +97,6 @@ function Cover() {
                   Don't have an account?{" "}
                   <MDTypography
                     component={Link}
-                    
                     to="/authentication/sign-up"
                     variant="button"
                     color="info"
@@ -103,7 +107,7 @@ function Cover() {
                   </MDTypography>
                 </MDTypography>
               </MDBox>
-            </MDBox>
+            </form>
           </MDBox>
         </Card>
       </MDBox>
