@@ -7,6 +7,7 @@ build:
   services:
     - docker:dind
   script:
+    - docker login
     - docker build -t imagegitlabci .
     - docker run -d --name container2 -p 3005:3005 imagegitlabci
 
