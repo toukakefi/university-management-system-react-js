@@ -6,14 +6,10 @@ build:
   image: docker:latest
   services:
     - docker:dind
-  variables:
-   
-    #IMAGE_NAME: "recordweb"  
-    #CONTAINER_NAME:  "recordweb"
   script:
-   
-   - docker build -t imagegitlabci .
-   - docker run -d --name container2 -p 3005:3005 imagegitlabci
+    - docker build -t imagegitlabci .
+    - docker run -d --name container2 -p 3005:3005 imagegitlabci
+
    #- docker tag imagegitlabci kefitouka2830/imagegitlabci:latest
    #- docker push kefitouka2830/imagegitlabci:latest
    
