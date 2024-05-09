@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Edit, Delete } from '@mui/icons-material';
+import { Edit, Delete, CalendarToday } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -11,164 +10,160 @@ import {
 } from '@mui/material';
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
+import MDAvatar from "components/MDAvatar";
+import team2 from "assets/images/ia.jpg";
 
 export default function Data() {
-  const [editingJob, setEditingJob] = useState(null);
+  const [editingProfessor, setEditingProfessor] = useState(null);
   const [open, setOpen] = useState(false);
-  const [selectedFields, setSelectedFields] = useState([]);
+  const [selectedField, setSelectedField] = useState('');
   const [formData, setFormData] = useState({
     id: '',
-    filiere: '',
-    groupe: '',
-    professor: '',
-    room: '',
-    startTime: '',
-    endTime: '',
-    subject: '',
-    typeOfWeek: ''
+    Title: '',
+    Description: '',
+    Attachment: '', // Changed from 'attachment' to 'Attachment'
+    Date: '',
   });
 
-  const [tableData, setTableData] = useState([]);
-
-  const handleEditClick = (jobId) => {
-    setEditingJob(jobId);
+  const handleEditClick = (professorId) => {
+    setEditingProfessor(professorId);
     setOpen(true);
   };
 
   const handleClose = () => {
-    setEditingJob(null);
+    setEditingProfessor(null);
     setOpen(false);
-    setSelectedFields([]);
+    setSelectedField('');
     setFormData({
-      ...formData,
       id: '',
-      filiere: '',
-      groupe: '',
-      professor: '',
-      room: '',
-      startTime: '',
-      endTime: '',
-      subject: '',
-      typeOfWeek: ''
+      Title: '',
+      Description: '',
+      Attachment: '', // Changed from 'attachment' to 'Attachment'
+      Date: ''
     });
   };
 
   const handleFieldSelect = (field) => {
-    setSelectedFields([...selectedFields, field]);
+    setSelectedField(field);
   };
 
-  const handleInputChange = (e, fieldName) => {
+  const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [fieldName]: e.target.value
+      [selectedField]: e.target.value
     });
   };
 
   const handleSave = () => {
-    console.log("Form Data:", formData);
-    setTableData([formData, ...tableData]);
-    console.log("Table Data:", tableData);
+    // You can handle saving the form data here
     handleClose();
   };
 
-  const renderTextField = (fieldName) => (
-    <TextField
-      key={fieldName}
-      label={fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}
-      name={fieldName}
-      value={formData[fieldName]}
-      onChange={(e) => handleInputChange(e, fieldName)}
-      fullWidth
-      style={{ marginBottom: '20px' }}
-      variant="outlined"
-      InputLabelProps={{
-        shrink: fieldName === 'startTime' || fieldName === 'endTime' ? true : undefined,
-      }}
-      type={fieldName === 'startTime' || fieldName === 'endTime' ? 'time' : 'text'}
-      select={fieldName === 'typeOfWeek'}
-    >
-      {fieldName === 'typeOfWeek' && (
-        <MenuItem value="Semaine A">Semaine A</MenuItem>
-      )}
-    </TextField>
+  const Author = ({ image, name }) => (
+    <MDBox display="flex" alignItems="center" lineHeight={1}>
+      <MDAvatar src={image} name={name} size="sm" />
+      <MDBox ml={2} lineHeight={1}>
+        <MDTypography display="block" variant="button" fontWeight="medium">
+          {name}
+        </MDTypography>
+      </MDBox>
+    </MDBox>
   );
 
   return {
     columns: [
-      { Header: "ID", accessor: "id", width: "20%", align: "left" },
-      { Header: "Filière", accessor: "filiere", align: "center" },
-      { Header: "Groupe", accessor: "groupe", align: "center" },
-      { Header: "Professeur", accessor: "professor", align: "center" },
-      { Header: "Salle", accessor: "room", align: "center" },
-      { Header: "Heure de début", accessor: "startTime", align: "center" },
-      { Header: "Heure de fin", accessor: "endTime", align: "center" },
-      { Header: "Matière", accessor: "subject", align: "center" },
-      { Header: "Type de semaine", accessor: "typeOfWeek", align: "center" },
+      { Header: "libellé", accessor: "project", width: "30%", align: "left" },
+      { Header: "Description", accessor: "status", align: "center" },
+      { Header: "Attachment", accessor: "attachment", align: "center" }, // Changed from 'attachement' to 'Attachment'
       { Header: "Action", accessor: "action", align: "center" },
     ],
 
-    rows: tableData.map((data, index) => ({
-      id: (
-        <MDTypography variant="body2">
-          {index + 1}
-        </MDTypography>
-      ),
-      filiere: (
-        <MDTypography variant="body2">
-          {data.filiere}
-        </MDTypography>
-      ),
-      groupe: (
-        <MDTypography variant="body2">
-          {data.groupe}
-        </MDTypography>
-      ),
-      professor: (
-        <MDTypography variant="body2">
-          {data.professor}
-        </MDTypography>
-      ),
-      room: (
-        <MDTypography variant="body2">
-          {data.room}
-        </MDTypography>
-      ),
-      startTime: (
-        <MDTypography variant="body2">
-          {data.startTime}
-        </MDTypography>
-      ),
-      endTime: (
-        <MDTypography variant="body2">
-          {data.endTime}
-        </MDTypography>
-      ),
-      subject: (
-        <MDTypography variant="body2">
-          {data.subject}
-        </MDTypography>
-      ),
-      typeOfWeek: (
-        <MDTypography variant="body2">
-          {data.typeOfWeek}
-        </MDTypography>
-      ),
-      action: (
-        <MDBox display="flex" alignItems="center">
-          <Edit onClick={() => handleEditClick(index)} />
-          <Delete />
-        </MDBox>
-      ), 
-    })),
-
-    open,
-    handleEditClick,
-    handleClose,
-    handleFieldSelect,
-    renderTextField,
-    selectedFields,
-    formData,
-    handleInputChange,
-    handleSave,
+    rows: [
+      {
+        id: "1",
+        project: (
+          <div>
+            <Author  name="event name "   />
+            <Dialog open={open && editingProfessor === "1"} onClose={handleClose}>
+              <DialogTitle>Edit News</DialogTitle>
+              <DialogContent>
+                <form style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }}>
+                  <TextField
+                    label="ID"
+                    name="id"
+                    value={formData.id}
+                    disabled
+                    fullWidth
+                    style={{ marginBottom: '20px' }}
+                  />
+                  <TextField
+                    select
+                    label="Select Field to Edit"
+                    value={selectedField}
+                    onChange={(e) => handleFieldSelect(e.target.value)}
+                    fullWidth
+                    style={{ marginBottom: '20px' }}
+                    variant="outlined"
+                  >
+                    <MenuItem value="Title">Title</MenuItem>
+                    <MenuItem value="Description">Description</MenuItem>
+                    <MenuItem value="Date">Date</MenuItem>
+                    <MenuItem value="Attachment">Attachment</MenuItem>
+                  </TextField>
+                  {selectedField && (
+                    <TextField
+                      label={selectedField === 'Date' ? 'Date' : selectedField}
+                      name={selectedField}
+                      value={formData[selectedField]}
+                      onChange={handleInputChange}
+                      fullWidth
+                      style={{ marginBottom: '20px' }}
+                      variant="outlined"
+                      InputProps={{
+                        endAdornment: selectedField === 'Date' ? <CalendarToday /> : null,
+                      }}
+                      InputLabelProps={{
+                        shrink: selectedField === 'Date' ? true : undefined,
+                      }}
+                      type={selectedField === 'Date' ? 'date' : 'text'}
+                    />
+                  )}
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleSave}
+                      style={{ color: 'white', marginRight: '10px' }}
+                    >
+                      Save
+                    </Button>
+                    <Button variant="outlined" onClick={handleClose}
+                    style={{ color: 'grey', marginRight: '10px' }}
+                    >Cancel</Button>
+                  </div>
+                </form>
+              </DialogContent>
+            </Dialog>
+          </div>
+        ),
+        status: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            jsdfhjskdfhjkdsfh
+          </MDTypography>
+        ),
+        
+        attachment: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            url
+          </MDTypography>
+        ),
+        action: (
+          <MDBox display="flex" alignItems="center">
+            <Edit onClick={() => handleEditClick("1")} />
+            <Delete />
+          </MDBox>
+        ),
+      }
+    ],
   };
 }
